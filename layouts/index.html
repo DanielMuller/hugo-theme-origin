@@ -1,0 +1,13 @@
+{{ partial "structure/header" . }}
+{{ $paginator := .Paginate (where .Data.Pages "Type" (index .Site.Params.mainSections 0)) }}
+<nav class="pagination" role="pagination">
+{{ template "_internal/pagination.html" . }}
+</nav>
+{{ range $paginator.Pages }}
+    {{ .Render "summary" }}
+{{ end }}
+<nav class="pagination" role="pagination">
+{{ template "_internal/pagination.html" . }}
+</nav>
+
+{{ partial "structure/footer" . }}

@@ -1,0 +1,13 @@
+{{ partial "structure/header" . }}
+<article>
+<h1 class="post-title">{{ .Title }}</h1>
+{{ partial "byline" . }}
+<section>
+{{ if isset .Params "image" }}
+    {{ partial "amp/figure-title-image" . }}
+{{ end }}
+{{ .Content }}
+</section>
+</article>
+{{ partial "social/share" . }}
+{{ partial "structure/footer" . }}

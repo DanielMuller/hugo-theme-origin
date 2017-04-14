@@ -1,0 +1,39 @@
+{{ $image := .Params.image }}
+{{ $type_arr := split $image "." }}
+{{ $srcbase := printf "%s" (index $type_arr 0) }}
+{{ $srcext := index $type_arr 1 }}
+{{ $.Scratch.Set "srcbase" $srcbase }}
+{{ $.Scratch.Set "srcext" $srcext }}
+{{ with (imageConfig (printf "static%s" $image)) }}
+    {{ $.Scratch.Set "srcwidth" .Width }}
+    {{ $.Scratch.Set "srcheight" .Height }}
+{{end}}
+
+{{ $.Scratch.Set "srcset" "" }}
+{{ range ( slice 150 300) ", "}}
+    {{ if and (gt ( $.Scratch.Get "srcwidth" ) . ) (gt ( $.Scratch.Get "srcheight" ) . ) }}
+        {{ $.Scratch.Set "srcset" ( printf "%s%s-square-%dpx.%s %dw, " ($.Scratch.Get "srcset") ($.Scratch.Get "srcbase") . ($.Scratch.Get "srcext") .) }}
+    {{ end }}
+{{end}}
+<figure class="summary-image">
+    <amp-img
+        src="{{$srcbase}}-square-150px.webp"
+        srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ replace . $srcext "webp" }} {{ end }}"
+        width="300"
+        height="300"
+        layout="responsive"
+        sizes="(min-width: 500px) 100px, 75px"
+    >
+        <div fallback>
+            <amp-img
+                src="{{$srcbase}}-square-150px.{{$srcext}}"
+                srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ . }} {{ end }}"
+                width="300"
+                height="300"
+                layout="responsive"
+                sizes="(min-width: 500px) 100px, 75px"
+            >
+            </amp-img>
+        </div>
+    </amp-img>
+</figure>

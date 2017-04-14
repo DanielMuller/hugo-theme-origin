@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>tweets</title>
+<script language="javascript">
+const getQueryVariable = (variable) => {
+  let query = window.location.search.substring(1)
+  let vars = query.split('&')
+  for (let i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=')
+    if (pair[0] === variable) {
+      return pair[1]
+    }
+  }
+  return false
+}
+const getFeed = () => {
+  twttr.widgets.createTimeline(
+    {
+      sourceType: 'profile',
+      screenName: getQueryVariable('feed')
+    },
+    document.getElementById('timeline'),
+    {
+      theme: 'light',
+      tweetLimit: 4,
+      height: 400,
+      chrome: 'noheader nofooter',
+      linkColor: '#dd5424',
+      borderColor: '#a80000'
+    }
+  )
+}
+</script>
+</head>
+<body>
+<a id="timeline"></a>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8" onLoad="getFeed()"></script>
+</body>
+</html>

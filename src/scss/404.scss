@@ -1,0 +1,51 @@
+@import 'definitions';
+
+html, body {
+    padding:0;
+    margin: 0;
+    background-color: #0000aa;
+    position:relative;
+    width:100%;
+    height:100%;
+    font-family: 'Cousine', monospace;
+    font-weight: 400;
+}
+div.error404 {
+    @media all and (orientation: portrait) {
+        font-size: 5vw;
+    }
+    @media all and (orientation: landscape) {
+        font-size: 3vw;
+    }
+    line-height:1.2;
+    box-sizing: border-box;
+    height:100%;
+    width:100%;
+    position: relative;
+    color: white;
+    padding: 20px;
+    .title-wrapper {
+        text-align:center;
+        margin-bottom:1em;
+        .title {
+            background-color: white;
+            color: #0000aa;
+            padding: 4px 8px;
+        }
+    }
+    .bottom-info {
+        text-align: center;
+    }
+    .bottom-links {
+        display:flex;
+        width: 100%;
+        > div {
+            flex: 1 1 auto;
+            text-align:center;
+            > a {
+                color: white;
+                text-decoration: underline;
+            }
+        }
+    }
+}

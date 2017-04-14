@@ -1,0 +1,45 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html ⚡ lang="en" class="no-js oldie"><![endif]-->
+<!--[if IE 8 ]><html ⚡ lang="en" class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html ⚡ lang="en" class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html ⚡ lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}" class="no-js"><!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        {{ partial "amp/header" . }}
+        <link rel="canonical" href="{{ .Permalink }}">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+        {{ with  .OutputFormats.Get "rss" -}}
+          <link href="{{ .Permalink | relURL }}" rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Site.Title | title }} - {{ $.Site.Params.description | title }}" />
+          <link href="{{ .Permalink  | relURL }}" rel="feed" type="{{ .MediaType.Type }}" title="{{ $.Site.Title | title }} - {{ $.Site.Params.description | title }}" />
+        {{- end }}
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <meta name="theme-color" content="{{ $.Site.Params.themeColor }}" />
+
+        {{ if isset .Site.Params "favicon" }}
+            {{ partial "structure/favicon.html" .Site.Params.favicon }}
+        {{ end }}
+        <title>{{ if .IsHome }}{{ .Site.Title | title }} &middot; {{ .Site.Params.Description }}{{else}}
+        {{ if eq .Kind "taxonomy" }}
+            {{ .Data.Singular | title }}:
+            {{ if (eq .Data.Singular "tag") }}#{{.Title | upper }}{{ else }}{{.Title | title }}{{ end }}
+        {{ else }}
+            {{ .Title | title }}
+        {{ end }}
+         &middot; {{ .Site.Title | title }}{{ end }}</title>
+        {{ partial "seo/main" . }}
+    </head>
+    <body>
+        <div class="site-wrapper">
+            <header class="main-header">
+                <div class="site-title">
+                    <a href="{{ relURL .Site.BaseURL }}" rel="home">{{ .Site.Title }}</a>
+                </div>
+                <div class="site-description">
+                    <span>{{ .Site.Params.Description}}</span>
+                </div>
+            </header>
+            <main>

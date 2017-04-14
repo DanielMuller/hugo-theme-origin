@@ -1,0 +1,11 @@
+{{ if and (.Site.Author) (isset .Site.Author "twitter") }}
+<h3>Latest tweets</h3>
+<amp-iframe
+    src="https://{{ .Site.Params.iframedomain }}/iframe/twitter.html?feed={{ .Site.Author.twitter }}"
+    width="300"
+    height="400"
+    layout="responsive"
+    frameborder="0"
+    sandbox="allow-scripts allow-modals allow-popups allow-same-origin allow-forms"
+></amp-iframe>
+{{ end }}

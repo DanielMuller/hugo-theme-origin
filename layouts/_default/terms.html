@@ -1,0 +1,11 @@
+{{ partial "structure/header.html" . }}
+<div class="list-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+</div>
+<ul class="taxonomy-list">
+{{ $data := .Data }}
+{{ range $key, $value := .Data.Terms.ByCount }}
+    <li><a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}/">{{ if (eq $data.Singular "tag") }}#{{ $value.Name | upper }}{{ else }}{{ $value.Name | title }}{{ end }}</a> ({{ $value.Count }})</li>
+{{ end }}
+</ul>
+{{ partial "structure/footer.html" . }}

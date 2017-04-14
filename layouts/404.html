@@ -1,0 +1,40 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html ⚡ lang="en" class="no-js oldie"><![endif]-->
+<!--[if IE 8 ]><html ⚡ lang="en" class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html ⚡ lang="en" class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html ⚡ lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}" class="no-js"><!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
+        <script async src="https://cdn.ampproject.org/v0.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Cousine" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+        <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+        <style amp-custom>
+        {{ partial "styles/404" . | safeCSS}}
+        </style>
+
+        <link rel="canonical" href="/404.html">
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+        <meta name="theme-color" content="{{ $.Site.Params.themeColor }}" />
+
+        {{ if isset .Site.Params "favicon" }}
+            {{ partial "structure/favicon.html" .Site.Params.favicon }}
+        {{ end }}
+        <title>{{ if .IsHome }}{{ .Site.Title | title }} &middot; {{ .Site.Params.Description }}{{else}}{{ .Title | title }} &middot; {{ .Site.Title | title }}{{ end }}</title>
+    </head>
+    <body>
+        <div class="error404">
+            <div class="title-wrapper"><span class="title">ERROR 404</span></div>
+            <p>The page is missing or was never written. You can wait and see if it becomes available again, or you can restart your computer.</p>
+            <p>* Press CTRL+ALT+DEL to restart your computer. You will lose unsaved informations in any programs that are running.</p>
+            <div class="bottom-info"><p>Press any link to continue</p></div>
+            <div class="bottom-links">
+                <div><a href="/">Home</a></div>
+{{ range $taxonomyname, $taxonomy := .Site.Taxonomies }}
+                <div><a href="{{ "/" | relLangURL}}{{ $taxonomyname | urlize }}/">{{ $taxonomyname | title }}</a></div>
+{{ end }}
+            </div>
+        </div>
+    </body>
+</html>

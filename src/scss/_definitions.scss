@@ -1,0 +1,50 @@
+@mixin link ($link, $hover) {
+    a {
+        text-decoration: none;
+        color: $link;
+        &:visited {
+            color:$link;
+        }
+        &:hover, &:active, &:focus {
+            color: $hover;
+        }
+    }
+}
+
+@mixin font-size($sizeValue: 1.6) {
+    font-size: ($sizeValue * 10) + px;
+    font-size: $sizeValue + rem;
+}
+
+$background-color: #fff;
+$font-stack: Bitter, serif;
+$primary-color: #555;
+$link-color: #dd5424;
+$link-hover-color: #000;
+$titles: #222;
+$byline: #aaa;
+$table-td: #888;
+$separator: #e5e5e5;
+$code-background: #f0f0f0;
+
+$regular:400;
+$bold:700;
+
+body, html {
+    font-family: $font-stack;
+    color: $primary-color;
+}
+html {
+    font-size: 62.5%;
+}
+
+body {
+    @include font-size(1.3);
+    line-height:1.4em;
+    background-color: $background-color;
+}
+.clearfix::after {
+    content:"";
+    clear:both;
+    display:table;
+}

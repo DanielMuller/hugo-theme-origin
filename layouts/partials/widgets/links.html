@@ -1,0 +1,11 @@
+{{ if .Site.Menus.links }}
+    <h3>Links</h3>
+    <ul>
+        {{ range .Site.Menus.links }}
+            {{ with .Pre}}<h4 class="link-category">{{ . }}</h3>{{end}}
+            <li>
+                <a href="{{.URL}}">{{.Name}}</a>
+            </li>
+        {{end}}
+    </ul>
+{{ end }}

@@ -1,0 +1,24 @@
+{{ if not .Params.noauthor }}
+    {{$.Scratch.Set "author" .Site.Author}}
+    {{if .Params.author }}
+        {{if isset .Site.Data.authors (.Params.author | lower)}}
+            {{$author := index .Site.Data.authors (.Params.author | lower) }}
+            {{$.Scratch.Set "author" $author}}
+        {{end}}
+    {{end}}
+    {{$author := ($.Scratch.Get "author")}}
+<div class="byline"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time> by {{ $author.DisplayName }}
+{{if .Params.categories }}
+in
+    {{ range $index, $category := .Params.categories }}
+        {{ if gt $index 0 }}, {{ end }}<a href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . | title }}</a>
+    {{ end }}
+{{end}}
+{{if .Params.tags }}
+on
+    {{ range $index, $tag := .Params.tags }}
+        {{ if gt $index 0 }}, {{ end }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}">#{{ . | upper }}</a>
+    {{ end }}
+{{end}}
+</div>
+{{end}}

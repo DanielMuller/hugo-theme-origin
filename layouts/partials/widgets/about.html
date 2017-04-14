@@ -1,0 +1,61 @@
+{{ if .Site.Author }}
+    <h3>About Me</h3>
+        <div class="social">
+            {{ if .Site.Author.linkedin }}
+                <a href="https://www.linkedin.com/in/{{ .Site.Author.linkedin }}" target="_blank">
+                    <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.github }}
+                <a href="https://github.com/{{ .Site.Author.github }}" target="_blank">
+                    <i class="fa fa-github" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.flickr }}
+                <a href="https://flickr.com/{{ .Site.Author.flickr }}" target="_blank">
+                    <i class="fa fa-flickr" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.twitter }}
+                <a href="https://twitter.com/{{ .Site.Author.twitter }}" target="_blank">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.facebook }}
+                <a href="https://www.facebook.com/{{ .Site.Author.facebook }}" target="_blank">
+                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.instagram }}
+                <a href="https://instagram.com/{{ .Site.Author.instagram }}" target="_blank">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.email }}
+                <a href="mailto:{{ .Site.Author.email }}" target="_blank">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.pinterest }}
+                <a href="https://www.pinterest.com/{{ .Site.Author.pinterest }}" target="_blank">
+                    <i class="fa fa-pinterest" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.googlePlus }}
+                <a href="https://google.com/+{{ .Site.Author.googlePlus }}" target="_blank">
+                    <i class="fa fa-google-plus-official" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.website }}
+                <a href="{{ .Site.Author.website }}" target="_blank">
+                    <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                </a>
+            {{end}}
+            {{ if .Site.Author.flipboard }}
+                <a href="https://flipboard.com/@{{ .Site.Author.flipboard }}" target="_blank">
+                    <i class="" aria-hidden="true">F</i>
+                </a>
+            {{end}}
+        </div>
+    {{ .Site.Author.bio | markdownify }}
+{{ end }}

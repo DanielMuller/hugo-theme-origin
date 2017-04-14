@@ -1,0 +1,69 @@
+{{ $image := .Params.src }}
+{{ $type_arr := split $image "." }}
+{{ $srcbase := index $type_arr 0 }}
+{{ $srcext := index $type_arr 1 }}
+{{ $.Scratch.Set "srcbase" $srcbase }}
+{{ $.Scratch.Set "srcext" $srcext }}
+{{ with (imageConfig (printf "static%s" $image)) }}
+    {{ $.Scratch.Set "srcwidth" .Width }}
+    {{ $.Scratch.Set "srcheight" .Height }}
+{{end}}
+
+{{ $.Scratch.Set "srcset" "" }}
+{{ range ( slice 150 360 720 1280 1920 3840) ", "}}
+    {{ if gt ( $.Scratch.Get "srcwidth" ) . }}
+        {{ $.Scratch.Set "srcset" ( printf "%s%s-%dpx.%s %dw, " ($.Scratch.Get "srcset") ($.Scratch.Get "srcbase") . ($.Scratch.Get "srcext") .) }}
+    {{ end }}
+{{end}}
+{{ $.Scratch.Set "srcset" ( printf "%s%s.%s %dw" ($.Scratch.Get "srcset") $srcbase $srcext ($.Scratch.Get "srcwidth")) }}
+<figure class="w450">
+    <amp-img
+        src="{{$srcbase}}.webp"
+        {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+        {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+        srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ replace . $srcext "webp" }} {{ end }}"
+        width="{{ $.Scratch.Get "srcwidth" }}"
+        height="{{ $.Scratch.Get "srcheight" }}"
+        {{ with .Params.lightbox }}
+            tabindex="0"
+            on="tap:{{.}}"
+            role="link"
+        {{ end }}
+        layout="responsive"
+        sizes="(min-width: 500px) 450px, 100vw"
+    >
+        <div fallback>
+            <amp-img
+                src="{{$srcbase}}.{{$srcext}}"
+                {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+                {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+                srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ . }} {{ end }}"
+                width="{{ $.Scratch.Get "srcwidth" }}"
+                height="{{ $.Scratch.Get "srcheight" }}"
+                {{ with .Params.lightbox }}
+                    tabindex="0"
+                    on="tap:{{.}}"
+                    role="link"
+                {{ end }}
+                layout="responsive"
+                sizes="(min-width: 500px) 450px, 100vw"
+            >
+            </amp-img>
+        </div>
+    </amp-img>
+    {{ if or (isset .Params "title") (isset .Params "caption") (isset .Params "attr") }}
+    <figcaption>
+    {{ if isset .Params "title" }}
+        <h4>{{ .Params.title }}</h4>
+    {{ end }}
+    {{ if or (isset .Params "caption") (isset .Params "attr")}}
+        <p>
+        {{ .Params.caption }}
+        {{ if isset .Params "attrlink" }}<a href="{{.Params.attrlink}}">{{ end }}
+        {{ .Params.attr }}
+        {{ if isset .Params "attrlink" }}</a>{{ end }}
+        </p>
+    {{ end }}
+    </figcaption>
+    {{ end }}
+</figure>
