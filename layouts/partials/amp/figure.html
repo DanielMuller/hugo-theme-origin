@@ -59,7 +59,7 @@
     {{ if or (isset .Params "caption") (isset .Params "attr")}}
         <p>
         {{ .Params.caption }}
-        {{ if isset .Params "attrlink" }}<a href="{{.Params.attrlink}}">{{ end }}
+        {{ if isset .Params "attrlink" }}<br/><a href="{{.Params.attrlink}}">{{ end }}
         {{ .Params.attr }}
         {{ if isset .Params "attrlink" }}</a>{{ end }}
         </p>
