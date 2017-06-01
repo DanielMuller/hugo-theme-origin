@@ -32,24 +32,23 @@
         layout="responsive"
         sizes="(min-width: 500px) 450px, 100vw"
     >
-        <div fallback>
-            <amp-img
-                src="{{$srcbase}}.{{$srcext}}"
-                {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
-                {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
-                srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ . }} {{ end }}"
-                width="{{ $.Scratch.Get "srcwidth" }}"
-                height="{{ $.Scratch.Get "srcheight" }}"
-                {{ with .Params.lightbox }}
-                    tabindex="0"
-                    on="tap:{{.}}"
-                    role="link"
-                {{ end }}
-                layout="responsive"
-                sizes="(min-width: 500px) 450px, 100vw"
-            >
-            </amp-img>
-        </div>
+        <amp-img
+            src="{{$srcbase}}.{{$srcext}}"
+            fallback
+            {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+            {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
+            srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ . }} {{ end }}"
+            width="{{ $.Scratch.Get "srcwidth" }}"
+            height="{{ $.Scratch.Get "srcheight" }}"
+            {{ with .Params.lightbox }}
+                tabindex="0"
+                on="tap:{{.}}"
+                role="link"
+            {{ end }}
+            layout="responsive"
+            sizes="(min-width: 500px) 450px, 100vw"
+        >
+        </amp-img>
     </amp-img>
     {{ if or (isset .Params "title") (isset .Params "caption") (isset .Params "attr") }}
     <figcaption>
