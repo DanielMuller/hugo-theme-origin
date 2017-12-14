@@ -1,10 +1,17 @@
+{{ if eq (getenv "HUGO_ENV") "production"}}
+    {{$.Scratch.Set "staticDir" "static"}}
+{{ else }}
+    {{$.Scratch.Set "staticDir" "src"}}
+{{ end }}
+{{$staticDir := ($.Scratch.Get "staticDir")}}
+
 {{ $image := .Params.src }}
 {{ $type_arr := split $image "." }}
 {{ $srcbase := index $type_arr 0 }}
 {{ $srcext := index $type_arr 1 }}
 {{ $.Scratch.Set "srcbase" $srcbase }}
 {{ $.Scratch.Set "srcext" $srcext }}
-{{ with (imageConfig (printf "static%s" $image)) }}
+{{ with (imageConfig (printf "%s%s" $staticDir $image)) }}
     {{ $.Scratch.Set "srcwidth" .Width }}
     {{ $.Scratch.Set "srcheight" .Height }}
 {{end}}

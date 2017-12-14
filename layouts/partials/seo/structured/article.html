@@ -8,6 +8,13 @@
     {{end}}
 {{ end }}
 {{$author := ($.Scratch.Get "author")}}
+{{ if eq (getenv "HUGO_ENV") "production"}}
+    {{$.Scratch.Set "staticDir" "static"}}
+{{ else }}
+    {{$.Scratch.Set "staticDir" "src"}}
+{{ end }}
+{{$staticDir := ($.Scratch.Get "staticDir")}}
+
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
@@ -34,7 +41,7 @@
       "isBasedOn" : "{{ .Params.article.image.link }}"
   },
 {{- else if isset .Params "image" -}}
-  {{ $imageConfig := imageConfig (printf "static%s" .Params.Image) }}
+  {{ $imageConfig := imageConfig (printf "%s%s" $staticDir .Params.Image) }}
   "image" : {
       "@context": "http://schema.org",
       "@type": "ImageObject",
