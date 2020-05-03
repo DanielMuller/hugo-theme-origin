@@ -52,5 +52,5 @@
                 </a>
             {{end}}
         </div>
-    {{ .Site.Author.bio | markdownify }}
+    {{ .Site.Author.bio | .RenderString }}
 {{ end }}
