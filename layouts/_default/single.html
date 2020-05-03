@@ -1,13 +1,13 @@
-{{ partial "structure/header" . }}
+{{ define "main" }}
 <article>
 <h1 class="post-title">{{ .Title }}</h1>
 {{ partial "byline" . }}
 <section>
 {{ if isset .Params "image" }}
-    {{ partial "amp/figure-title-image" . }}
+    {{ partial "amp/figure-title-image" .Params.image }}
 {{ end }}
 {{ .Content }}
 </section>
 </article>
 {{ partial "social/share" . }}
-{{ partial "structure/footer" . }}
+{{ end }}

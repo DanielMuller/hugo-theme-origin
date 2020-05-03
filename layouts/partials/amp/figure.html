@@ -1,75 +1,46 @@
-{{ if eq (getenv "HUGO_ENV") "production"}}
-    {{$.Scratch.Set "staticDir" "static"}}
-{{ else }}
-    {{$.Scratch.Set "staticDir" "src"}}
-{{ end }}
-{{$staticDir := ($.Scratch.Get "staticDir")}}
-
-{{ $image := .Params.src }}
-{{ $type_arr := split $image "." }}
-{{ $srcbase := index $type_arr 0 }}
-{{ $srcext := index $type_arr 1 }}
-{{ $.Scratch.Set "srcbase" $srcbase }}
-{{ $.Scratch.Set "srcext" $srcext }}
-{{ with (imageConfig (printf "%s%s" $staticDir $image)) }}
-    {{ $.Scratch.Set "srcwidth" .Width }}
-    {{ $.Scratch.Set "srcheight" .Height }}
-{{end}}
-
-{{ $.Scratch.Set "srcset" "" }}
-{{ range ( slice 150 360 720 1280 1920 3840) ", "}}
-    {{ if gt ( $.Scratch.Get "srcwidth" ) . }}
-        {{ $.Scratch.Set "srcset" ( printf "%s%s-%dpx.%s %dw, " ($.Scratch.Get "srcset") ($.Scratch.Get "srcbase") . ($.Scratch.Get "srcext") .) }}
-    {{ end }}
-{{end}}
-{{ $.Scratch.Set "srcset" ( printf "%s%s.%s %dw" ($.Scratch.Get "srcset") $srcbase $srcext ($.Scratch.Get "srcwidth")) }}
 <figure class="w450">
-    <amp-img
-        src="{{$srcbase}}.webp"
-        {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
-        {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
-        srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ replace . $srcext "webp" }} {{ end }}"
-        width="{{ $.Scratch.Get "srcwidth" }}"
-        height="{{ $.Scratch.Get "srcheight" }}"
-        {{ with .Params.lightbox }}
-            tabindex="0"
-            on="tap:{{.}}"
-            role="link"
-        {{ end }}
-        layout="responsive"
+  {{ $resource := resources.Get .src }}
+  {{ with $resource }}
+    {{ if and (eq .ResourceType "image") (ne .MediaType.SubType "svg") }}
+      <amp-img
+        src="{{ .Permalink | absURL }}"
+        srcset="
+          {{ (.Resize "3840x").Permalink }} 3840w,
+          {{ (.Resize "1920x").Permalink }} 1920w,
+          {{ (.Resize "1280x").Permalink }} 1280w,
+          {{ (.Resize "720x").Permalink }} 720w,
+          {{ (.Resize "360x").Permalink }} 360w,
+          {{ (.Resize "150x").Permalink }} 150w
+        "
+        width={{ with $.width }} "{{ . }}" {{ else }} {{ .Width }} {{ end }}
+        height={{ with $.height }} "{{ . }}" {{ else }} {{ .Height }} {{ end }}
+        layout={{ with $.layout }}"{{ . }}"{{else}}"responsive"{{ end }}
+        {{ with $.alt }}alt="{{ . }}"{{ end }}
         sizes="(min-width: 500px) 450px, 100vw"
-    >
-        <amp-img
-            src="{{$srcbase}}.{{$srcext}}"
-            fallback
-            {{ with .Params.alt }}alt="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
-            {{ with .Params.attribution }}attribution="{{ range (split . " ") }}{{ . }} {{ end }}"{{ end }}
-            srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ . }} {{ end }}"
-            width="{{ $.Scratch.Get "srcwidth" }}"
-            height="{{ $.Scratch.Get "srcheight" }}"
-            {{ with .Params.lightbox }}
-                tabindex="0"
-                on="tap:{{.}}"
-                role="link"
-            {{ end }}
-            layout="responsive"
-            sizes="(min-width: 500px) 450px, 100vw"
-        >
-        </amp-img>
-    </amp-img>
-    {{ if or (isset .Params "title") (isset .Params "caption") (isset .Params "attr") }}
-    <figcaption>
-    {{ if isset .Params "title" }}
-        <h4>{{ .Params.title }}</h4>
+      ></amp-img>
+    {{ else }}
+      <amp-img
+        src="{{ .Permalink | absURL }}"
+        width={{ with $.width }} "{{ . }}" {{ else }} {{ .Width }} {{ end }}
+        height={{ with $.height }} "{{ . }}" {{ else }} {{ .Height }} {{ end }}
+        layout={{ with $.layout }}"{{ . }}"{{else}}"responsive"{{ end }}
+        {{ with $.alt }}alt="{{ . }}"{{ end }}
+      ></amp-img>
     {{ end }}
-    {{ if or (isset .Params "caption") (isset .Params "attr")}}
-        <p>
-        {{ .Params.caption }}
-        {{ if isset .Params "attrlink" }}<br/><a href="{{.Params.attrlink}}">{{ end }}
-        {{ .Params.attr }}
-        {{ if isset .Params "attrlink" }}</a>{{ end }}
-        </p>
+  {{ end }}
+  {{ if or (.title) (.caption) (.attr) }}
+    <figcaption>
+    {{ if .title }}
+      <h4>{{ .title }}</h4>
+    {{ end }}
+    {{ if or (.caption) (.attr)}}
+      <p>
+      {{ .caption }}
+      {{ if .attrlink }}<br/><a href="{{ .attrlink }}">{{ end }}
+      {{ .attr }}
+      {{ if .attrlink }}</a>{{ end }}
+      </p>
     {{ end }}
     </figcaption>
-    {{ end }}
+  {{ end }}
 </figure>

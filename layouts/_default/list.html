@@ -1,16 +1,15 @@
-{{ partial "structure/header.html" . }}
-
+{{ define "main" }}
 <div class="list-header">
-    <h1 class="post-title">
-    {{ if ( eq .Kind "taxonomy") }}
-        <a href="/{{ .Data.Plural | urlize }}/">{{ .Data.Singular | title }}</a>: {{ if (eq .Data.Singular "tag") }}#{{.Title | upper }}{{ else }}{{.Title | title }}{{ end }}
-    {{ else }}
-        {{.Title | title }}
-    {{ end }}
-    </h1>
-    {{ with .Params.description }}
-    <h2 class="page-description">{{ . }}</h2>
-    {{end}}
+  <h1 class="post-title">
+  {{ if ( eq .Kind "taxonomy") }}
+    <a href="/{{ .Data.Plural | urlize }}/">{{ .Data.Singular | title }}</a>: {{ if (eq .Data.Singular "tag") }}#{{.Title | upper }}{{ else }}{{.Title | title }}{{ end }}
+  {{ else }}
+    {{.Title | title }}
+  {{ end }}
+  </h1>
+  {{ with .Params.description }}
+  <h2 class="page-description">{{ . }}</h2>
+  {{end}}
 </div>
 {{ $paginator := .Paginator }}
 <nav class="pagination" role="pagination">
@@ -22,5 +21,4 @@
 <nav class="pagination" role="pagination">
 {{ template "_internal/pagination.html" . }}
 </nav>
-
-{{ partial "structure/footer.html" . }}
+{{ end }}

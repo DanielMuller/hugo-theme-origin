@@ -3,7 +3,7 @@
 {{ partial "byline" . }}
 <div class="clearfix">
 {{ if isset .Params "image" }}
-    {{ partial "amp/figure-summary-image" . }}
+    {{ partial "amp/figure-summary-image" .Params.image }}
 {{ end }}
 <div class="summary">
 {{ with .Params.Excerpt }}{{ . | plainify | htmlUnescape }}{{ else }}{{.Summary | plainify | htmlUnescape }}{{ end }}
