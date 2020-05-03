@@ -1,4 +1,4 @@
-{{ partial "structure/header.html" . }}
+{{ define "main" }}
 <div class="list-header">
     <h1 class="post-title">{{ .Title }}</h1>
 </div>
@@ -8,4 +8,4 @@
     <li><a href="/{{ $data.Plural }}/{{ $value.Name | urlize }}/">{{ if (eq $data.Singular "tag") }}#{{ $value.Name | upper }}{{ else }}{{ $value.Name | title }}{{ end }}</a> ({{ $value.Count }})</li>
 {{ end }}
 </ul>
-{{ partial "structure/footer.html" . }}
+{{ end }}

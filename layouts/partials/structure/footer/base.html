@@ -1,0 +1,17 @@
+{{ if and (eq .Type "post") (eq .Kind "page") (.Site.Params.disqusShortname)}}
+  <div class="comments">
+    <amp-iframe width=600 height=240
+      layout="responsive"
+      sandbox="allow-scripts allow-same-origin allow-modals allow-popups allow-forms"
+      frameborder="0"
+      resizable
+      src="https://{{ .Site.Params.iframedomain }}/iframe/disqus.html?identifier={{ .Permalink }}&shortname={{ .Site.Params.disqusShortname }}">
+      <div overflow tabindex=0 role=button aria-label="">Read more...</div>
+    </amp-iframe>
+  </div>
+{{ end }}
+  <div class="widgets">
+    <div class="about-me">{{ partial "widgets/about" . }}</div>
+    <div class="tweets">{{ partial "widgets/tweets" . }}</div>
+    <div class="links">{{ partial "widgets/links" . }}</div>
+  </div>

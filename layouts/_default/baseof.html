@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ⚡ lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}" class="no-js">
+  <head>
+    {{- partial "structure/head/base.html" . -}}
+    {{/* - partial "page/install-sw.html" . - */}}
+    {{/* - partial "structured-data/base.html" . - */}}
+  </head>
+  <body>
+    <div class="site-wrapper">
+      <header class="main-header">
+        {{- partial "structure/header/base.html" . -}}
+      </header>
+    <main>
+      {{- block "main" . }}{{- end }}
+    </main>
+    <footer>
+      {{- partial "structure/footer/base.html" . -}}
+    </footer>
+  </body>
+  {{- partial "amp/google-analytics.html" . -}}
+</html>

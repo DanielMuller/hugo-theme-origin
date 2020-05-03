@@ -1,47 +1,19 @@
-{{ if eq (getenv "HUGO_ENV") "production"}}
-    {{$.Scratch.Set "staticDir" "static"}}
-{{ else }}
-    {{$.Scratch.Set "staticDir" "src"}}
-{{ end }}
-{{$staticDir := ($.Scratch.Get "staticDir")}}
-
-{{ $image := .Params.image }}
-{{ $type_arr := split $image "." }}
-{{ $srcbase := index $type_arr 0 }}
-{{ $srcext := index $type_arr 1 }}
-{{ $.Scratch.Set "srcbase" $srcbase }}
-{{ $.Scratch.Set "srcext" $srcext }}
-{{ with (imageConfig (printf "%s%s" $staticDir $image)) }}
-    {{ $.Scratch.Set "srcwidth" .Width }}
-    {{ $.Scratch.Set "srcheight" .Height }}
-{{end}}
-
-{{ $.Scratch.Set "srcset" "" }}
-{{ range ( slice 150 360 720 1280 1920 3840) ", "}}
-    {{ if gt ( $.Scratch.Get "srcwidth" ) . }}
-        {{ $.Scratch.Set "srcset" ( printf "%s%s-%dpx.%s %dw, " ($.Scratch.Get "srcset") ($.Scratch.Get "srcbase") . ($.Scratch.Get "srcext") .) }}
-    {{ end }}
-{{end}}
-{{ $.Scratch.Set "srcset" ( printf "%s%s.%s %dw" ($.Scratch.Get "srcset") $srcbase $srcext ($.Scratch.Get "srcwidth")) }}
+{{- $resource := resources.Get . -}}
+{{ with $resource }}
 <figure class="title-image">
     <amp-img
-        src="{{$srcbase}}.webp"
-        srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ replace . $srcext "webp" }} {{ end }}"
-        width="{{ $.Scratch.Get "srcwidth" }}"
-        height="{{ $.Scratch.Get "srcheight" }}"
+        src="{{ .Permalink | absURL }}"
+        srcset="
+          {{ (.Resize "1000x").Permalink }} 4x,
+          {{ (.Resize "750x").Permalink }} 3x,
+          {{ (.Resize "500x").Permalink }} 2x,
+          {{ (.Resize "375x").Permalink }} 1.5x,
+          {{ (.Resize "250x").Permalink }} 1x
+        "
+        width="{{ $resource.Width }}"
+        height="{{ $resource.Height }}"
         layout="responsive"
         sizes="(min-width: 500px) 250px, 150px"
-    >
-        <div fallback>
-            <amp-img
-                src="{{$srcbase}}.{{$srcext}}"
-                srcset="{{ range (split ($.Scratch.Get "srcset") " ") }}{{ . }} {{ end }}"
-                width="{{ $.Scratch.Get "srcwidth" }}"
-                height="{{ $.Scratch.Get "srcheight" }}"
-                layout="responsive"
-                sizes="(min-width: 500px) 250px, 150px"
-            >
-            </amp-img>
-        </div>
-    </amp-img>
+    ></amp-img>
 </figure>
+{{ end }}

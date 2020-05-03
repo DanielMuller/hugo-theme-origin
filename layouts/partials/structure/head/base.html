@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+{{ partial "amp/header" . }}
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+{{ with  .OutputFormats.Get "rss" -}}
+  <link href="{{ .Permalink | relURL }}" rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Site.Title | title }} - {{ $.Site.Params.description | title }}" />
+  <link href="{{ .Permalink  | relURL }}" rel="feed" type="{{ .MediaType.Type }}" title="{{ $.Site.Title | title }} - {{ $.Site.Params.description | title }}" />
+{{- end }}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<meta name="theme-color" content="{{ $.Site.Params.themeColor }}" />
+
+{{ with .Site.Params.favicon }}
+    {{ partial "structure/favicon.html" . }}
+{{ end }}
+<title>{{ if .IsHome }}{{ .Site.Title | title }} &middot; {{ .Site.Params.Description }}{{else}}
+{{ if eq .Kind "taxonomy" }}
+    {{ .Data.Singular | title }}:
+    {{ if (eq .Data.Singular "tag") }}#{{.Title | upper }}{{ else }}{{.Title | title }}{{ end }}
+{{ else }}
+    {{ .Title | title }}
+{{ end }}
+ &middot; {{ .Site.Title | title }}{{ end }}</title>
+{{ partial "seo/main" . }}

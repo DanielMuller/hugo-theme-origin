@@ -1,4 +1,4 @@
-{{ if in .Params.amp.elements "amp-social-share" }}
+{{ if eq .Type "post" }}
     <div class="share-me">
     <div class="title">Share this article</div>
     {{ partial "amp/social-share" .Site.Params.Share }}
