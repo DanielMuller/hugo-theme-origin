@@ -52,5 +52,5 @@
                 </a>
             {{end}}
         </div>
-    {{ .Site.Author.bio | .RenderString }}
+        {{ .Site.Author.bio | safeHTML }}
 {{ end }}

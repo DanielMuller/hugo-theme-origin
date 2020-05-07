@@ -1,14 +1,10 @@
+{{ $author := "" }}
 {{ if not .Params.noauthor }}
-    {{$.Scratch.Set "author" .Site.Author}}
-    {{if .Params.author }}
-        {{if isset .Site.Data.authors (.Params.author | lower)}}
-            {{$author := index .Site.Data.authors (.Params.author | lower) }}
-            {{$.Scratch.Set "author" $author}}
-        {{end}}
-    {{end}}
+  {{ $author = .Site.Author }}
+  {{if .Params.author }}
+    {{$author = index .Site.Data.authors (.Params.author | lower) }}
+  {{end}}
 {{ end }}
-{{$author := ($.Scratch.Get "author")}}
-
 <script type="application/ld+json">
 {
   "@context": "http://schema.org",
@@ -21,7 +17,7 @@
   "author": {
     "name" : "{{ $author.DisplayName }}"
   },
-{{- if isset .Params.article "image"}}
+{{- if .Params.article.image }}
   "image" : {
       "@context": "http://schema.org",
       "@type": "ImageObject",
@@ -34,7 +30,7 @@
       "license" : "{{ .Params.article.image.license_link }}",
       "isBasedOn" : "{{ .Params.article.image.link }}"
   },
-{{- else if isset .Params "image" -}}
+{{- else if .Params.image -}}
   {{- $resource := resources.Get .Params.image -}}
   "image" : {
       "@context": "http://schema.org",
@@ -63,7 +59,7 @@
       "isBasedOn" : ""
   },
 {{- end }}
-{{- if isset $.Site.Params "publisherName" }}
+{{- if $.Site.Params.publisherName }}
   "publisher" : {
     "@type": "Organization",
     "name" : "{{ $.Site.Params.publisherName }}",

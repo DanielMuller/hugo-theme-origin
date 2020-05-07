@@ -15,8 +15,8 @@
         <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
         <meta name="theme-color" content="{{ $.Site.Params.themeColor }}" />
 
-        {{ if isset .Site.Params "favicon" }}
-            {{ partial "structure/favicon.html" .Site.Params.favicon }}
+        {{ with .Site.Params.favicon }}
+            {{ partial "structure/favicon.html" . }}
         {{ end }}
         <title>{{ if .IsHome }}{{ .Site.Title | title }} &middot; {{ .Site.Params.Description }}{{else}}{{ .Title | title }} &middot; {{ .Site.Title | title }}{{ end }}</title>
     </head>
