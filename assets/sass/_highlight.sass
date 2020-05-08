@@ -1,0 +1,36 @@
+@mixin code-box
+  border: 1px solid $primary-color
+  border-radius: 4px
+  margin: 0
+  padding: 10px
+
+@import '../css/vendor/pygments/friendly'
+
+
+.highlight
+  pre
+    @include code-box
+    margin-bottom: 2em
+    max-height: 30em
+    overflow-x: auto
+    overflow-y: auto
+
+    code
+      background-color: inherit
+      padding: 0
+
+pre
+  &:has(> code)
+    @include code-box
+
+.gist
+  margin-bottom: 1em
+
+  .gist-data
+    max-height: 30em
+    overflow-x: scroll
+    overflow-y: auto
+
+code
+  background-color: $code-background
+  padding: 5px 2px

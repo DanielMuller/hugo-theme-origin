@@ -1,0 +1,56 @@
+@import 'definitions'
+$background-color: #00a
+$white: #fff
+
+@mixin error404-divs
+  .title-wrapper
+    margin-bottom: 1em
+    text-align: center
+
+    .title
+      background-color: $white
+      color: $background-color
+      padding: 4px 8px
+
+  .bottom-info
+    text-align: center
+
+  .bottom-links
+    display: flex
+    width: 100%
+
+    > div
+      flex: 1 1 auto
+      text-align: center
+
+      > a
+        color: $white
+        text-decoration: underline
+
+html, // sass-lint:disable-line empty-line-between-blocks
+body
+  background-color: $background-color
+  font-family: 'Cousine', monospace
+  font-weight: 400
+  height: 100%
+  margin: 0
+  padding: 0
+  position: relative
+  width: 100%
+
+div
+  &.error404
+    @include error404-divs
+    @media all and (orientation: portrait)
+      font-size: 5vw
+
+    @media all and (orientation: landscape)
+      font-size: 3vw
+
+    box-sizing: border-box
+    color: $white
+    height: 100%
+    line-height: 1.2
+    padding: 20px
+    position: relative
+    width: 100%

@@ -1,0 +1,27 @@
+@mixin thead
+  tr
+    border-bottom: 1px solid $separator
+    padding-bottom: 50px
+
+    th
+      @include font-size(1.6)
+      font-weight: $regular
+
+@mixin tbody
+  tr
+    &:first-child > td
+      padding-top: .5em
+
+    td
+      color: $table-td
+      padding: 2px 20px
+
+table // sass-lint:disable-line empty-line-between-blocks
+  @include font-size(1.3)
+  border-collapse: collapse
+  margin-bottom: 1em
+
+  thead
+    @include thead
+  tbody
+    @include tbody

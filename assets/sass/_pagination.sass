@@ -1,0 +1,49 @@
+$a-tags: 'a, a:active, a:hover, a:visited'
+
+@mixin li-pagination
+  li
+    display: inline
+    font-size: inherit
+
+    #{$a-tags}
+      border: 1px solid $separator
+      border-radius: 5px
+      color: $primary-color
+      float: left
+      margin-right: 4px
+      padding: .5em 1em
+      text-decoration: none
+
+    &:not(.active)
+      a
+        &:hover
+          background-color: $separator
+
+    &.active
+      a
+        background-color: $primary-color
+        color: $background-color
+
+    &.disabled
+      a
+        color: $byline
+
+      &:hover
+        background-color: $background-color
+        cursor: default
+
+@mixin ul-pagination
+  ul
+    &.pagination
+      @include li-pagination
+      display: inline-block
+      margin: .5em 0
+      padding: 0
+
+nav // sass-lint:disable-line empty-line-between-blocks
+  &.pagination
+    @include ul-pagination
+    text-align: right
+    @media all and (max-width: 500px)
+      @include font-size(1.1)
+      text-align: center

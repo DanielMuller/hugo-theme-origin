@@ -1,0 +1,50 @@
+.widgets
+  align-items: stretch
+  color: $table-td
+  display: flex
+  flex-direction: row
+  width: 100%
+  @media all and (max-width: 940px )
+    flex-direction: column
+
+
+  div
+    flex: 1 1 100%
+
+    h3
+      @include font-size(1)
+      color: $byline
+      letter-spacing: 1px
+      text-transform: uppercase
+      word-spacing: 2px
+
+    &.links
+      ul
+        list-style-type: none
+        margin: 0
+        padding: 0
+
+      h4
+        &.link-category
+          color: $byline
+          font-weight: $bold
+          margin: 0
+          padding: 0
+
+    &.about-me
+      .social
+        @include font-size(3)
+        @include link($byline, $titles)
+        display: flex
+        width: 100%
+
+        a
+          flex: 1 1 100%
+
+  > div
+    margin-left: 4px
+    margin-right: 4px
+    @media all and (max-width: 940px )
+      border-bottom: 1px solid $separator
+      margin-bottom: 1em
+      padding-bottom: 1em
