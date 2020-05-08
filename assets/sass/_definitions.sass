@@ -1,0 +1,42 @@
+@mixin link($link, $hover)
+  a
+    color: $link
+    text-decoration: none
+
+    &:visited
+      color: $link
+
+    &:hover,
+    &:active,
+    &:focus
+      color: $hover
+
+@mixin font-size($size-value: 1.6)
+  font-size: $size-value + rem
+
+$background-color: #fff
+$font-stack: Bitter, serif
+$primary-color: #555
+$link-color: #dd5424
+$link-hover-color: #000
+$titles: #222
+$byline: #aaa
+$table-td: #888
+$separator: #e5e5e5
+$code-background: #f0f0f0
+
+$regular: 400
+$bold: 700
+
+html
+  font-size: 62.5%
+
+body
+  @include font-size(1.3)
+  line-height: 1.4em
+
+.clearfix
+  &::after
+    clear: both
+    content: ''
+    display: table

@@ -1,0 +1,256 @@
+@mixin summary-figure
+  figure
+    margin: 0
+
+    &.summary-image
+      float: left
+      margin-bottom: .5em
+      margin-right: .5em
+      width: 100px
+      @media screen and (max-width: 500px)
+        width: 75px
+
+body,
+html
+  color: $primary-color
+  font-family: $font-stack
+
+body
+  background-color: $background-color
+
+header
+  &.main-header
+    border-bottom: 1px solid $separator
+    margin-bottom: 30px
+    margin-top: 20px
+    position: relative
+    width: 100%
+
+  .site-title
+    @include font-size(3)
+    @include link($titles, $titles)
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+    font-weight: $bold
+    letter-spacing: -2px
+    line-height: 1em
+    margin: 0 0 20px
+    text-transform: uppercase
+    width: 100%
+    word-wrap: break-word
+
+  .site-description
+    border-top: 5px solid $titles
+    box-sizing: border-box
+    color: $titles
+    font-style: italic
+    line-height: 1.5em
+    padding: 18px 4% 20px
+    text-align: center
+    text-transform: none
+    width: 100%
+
+    @media all and (min-width: 940px)
+      @include font-size(2.4)
+
+    @media all and (max-width: 939px) and (min-width: 720px)
+      font-size: 2.5vw
+
+    @media all and (max-width: 719px)
+      @include font-size(1.8)
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7,
+h8
+  color: $titles
+  font-weight: $regular
+  margin: 0 0 15px
+
+.post-title
+  @include font-size(1.6)
+  @include link($titles, $link-color)
+  line-height: 1.3em
+  margin: 0
+  padding: 0
+  text-transform: uppercase
+  word-spacing: 2px
+
+.list-header
+  border-bottom: 1px solid $separator
+  margin-bottom: 2em
+  padding-bottom: 2em
+
+  .post-title
+    @include font-size(2.4)
+
+article
+  .post-title
+    @include font-size(2.4)
+
+  h2
+    @include font-size(2.4)
+    margin-bottom: .8em
+    margin-top: 1.5em
+
+  h3
+    @include font-size(2)
+    margin-bottom: .2em
+    margin-top: 1em
+
+  h4
+    @include font-size(1.6)
+    margin-bottom: 0
+    margin-top: .8em
+
+  figure
+    display: block
+    margin: 0
+    margin-left: auto
+    margin-right: auto
+    text-align: center
+
+    &.title-image
+      float: left
+      margin-bottom: .5em
+      margin-right: .5em
+      width: 250px
+      @media screen and (max-width: 500px)
+        width: 150px
+
+
+    &.w300
+      width: 300px
+
+    &.w450
+      width: 450px
+
+    figcaption
+      border-bottom: 1px solid $separator
+      border-top: 1px solid $separator
+      margin-bottom: .5em
+      margin-top: .5em
+      padding: .5em 0
+      text-align: center
+
+      h4
+        @include font-size(1.6)
+        margin-bottom: 0
+        margin-top: 0
+
+      p
+        @include font-size(1.1)
+        margin: 0
+        text-align: center
+
+  .video
+    margin-bottom: 2em
+
+  section
+
+    p
+      text-align: justify
+
+  blockquote
+    @include font-size(1.6)
+    display: block
+    line-height: 1.2
+    margin: 0 0 20px
+    padding: 15px 20px 15px 45px
+    position: relative
+
+    &::before
+      @include font-size(6)
+      color: $byline
+      content: '\201C'
+      font-weight: $bold
+      left: 10px
+      position: absolute
+      top: 5px
+
+    &::after
+      content: ''
+
+    p
+      color: $table-td
+      font-style: italic
+
+.site-wrapper
+  margin: 0 auto
+  max-width: 940px
+  padding: 0 10px
+  position: relative
+
+.byline
+  @include font-size(1.1)
+  @include link($byline, $link-color)
+  color: $byline
+  font-style: italic
+  line-height: 1.7em
+  margin: 0 0 1em
+  word-spacing: 2px
+
+section
+  &.summary
+    @include summary-figure
+    border-bottom: 1px solid $separator
+    margin-bottom: 20px
+    padding-bottom: 20px
+    position: relative
+
+    &::after
+      background: $background-color
+      border: 1px solid $separator
+      border-radius: 50%
+      bottom: -5px
+      box-shadow: 0 0 0 5px $background-color
+      content: ''
+      display: block
+      height: 7px
+      left: 50%
+      margin-left: -5px
+      position: absolute
+      width: 7px
+
+    div
+      &.summary
+        text-align: justify
+
+ul
+  &.taxonomy-list
+    list-style-type: none
+    margin: 0
+    padding: 0
+
+  li
+    @include font-size(1.4)
+
+.share-me
+  border-top: 1px solid $separator
+  margin-top: 1em
+  padding-top: .5em
+
+  .title
+    font-weight: $bold
+
+  amp-social-share
+    background-color: $byline
+
+    &:hover
+      background-color: $titles
+
+footer
+  border-top: 5px solid $titles
+  margin-bottom: 2em
+  margin-top: 2em
+  padding-top: 1em
+
+  .comments
+    max-height: 500px
+    overflow-y: hidden
+
+@include link($link-color, $link-hover-color)
