@@ -4,11 +4,11 @@
     <amp-img
       src="{{ .Permalink | absURL }}"
       srcset="
-        {{ (.Fill "400x400").Permalink }} 4x,
-        {{ (.Fill "300x300").Permalink }} 3x,
-        {{ (.Fill "200x200").Permalink }} 2x,
-        {{ (.Fill "150x150").Permalink }} 1.5x,
-        {{ (.Fill "100x100").Permalink }} 1x
+        {{ (.Fill "400x400 Center").Permalink }} 4x,
+        {{ (.Fill "300x300 Center").Permalink }} 3x,
+        {{ (.Fill "200x200 Center").Permalink }} 2x,
+        {{ (.Fill "150x150 Center").Permalink }} 1.5x,
+        {{ (.Fill "100x100 Center").Permalink }} 1x
       "
       width="300"
       height="300"
