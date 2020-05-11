@@ -16,6 +16,10 @@
   {{- $ampSocialShare := index (index $.Site.Data "amp-modules") "amp-social-share" -}}
   <script async custom-element="amp-social-share" src="{{ $ampSocialShare }}"></script>
 {{ end }}
+{{ if gt ((findRE "<amp-img(.|\n)*?on=\"tap:" .Content 1) | len) 0 }}
+  {{- $ampImageLightbox := index (index $.Site.Data "amp-modules") "amp-image-lightbox" -}}
+  <script async custom-element="amp-image-lightbox" src="{{ $ampImageLightbox }}"></script>
+{{ end }}
 {{- $ampCorePath := index (index $.Site.Data "amp-modules") "amp-core" -}}
 <script async src="{{ $ampCorePath }}"></script>
 

@@ -6,6 +6,9 @@
     {{/* - partial "structured-data/base.html" . - */}}
   </head>
   <body>
+    {{- if gt ((findRE "<amp-img(.|\n)*?on=\"tap:" .Content 1) | len) 0 -}}
+      {{- partial "amp/image-lightbox" (dict "id" "lightbox") -}}
+    {{- end -}}
     <div class="site-wrapper">
       <header class="main-header">
         {{- partial "structure/header/base.html" . -}}
