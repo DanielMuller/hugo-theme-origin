@@ -3,6 +3,9 @@
   {{ with $resource }}
     {{ if and (eq .ResourceType "image") (ne .MediaType.SubType "svg") }}
       <amp-img
+        on="tap:lightbox"
+        role="link"
+        tabindex="0"
         src="{{ .Permalink | absURL }}"
         srcset="
           {{ (.Resize "3840x").Permalink }} 3840w,
