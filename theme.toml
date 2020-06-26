@@ -8,7 +8,7 @@ description = ""
 homepage = "https://github.com/DanielMuller/hugo-theme-origin"
 tags = ["blog"]
 features = ["blog"]
-min_version = 0.69.2
+min_version = 0.69
 
 [author]
   name = "Daniel Muller"
