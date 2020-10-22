@@ -41,6 +41,11 @@
                     <i class="fab fa-pinterest" aria-hidden="true"></i>
                 </a>
             {{end}}
+            {{ if .Site.Author.reddit }}
+                <a href="https://www.reddit.com/user/{{ .Site.Author.reddit }}" target="_blank">
+                    <i class="fab fa-reddit" aria-hidden="true"></i>
+                </a>
+            {{end}}
             {{ if .Site.Author.website }}
                 <a href="{{ .Site.Author.website }}" target="_blank">
                     <i class="far fa-address-card" aria-hidden="true"></i>
