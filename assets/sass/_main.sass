@@ -18,9 +18,6 @@ html
 body
   background-color: $background-color
 
-ul
-  list-style-position: inside
-
 header
   &.main-header
     border-bottom: 1px solid $separator
@@ -224,6 +221,8 @@ section
         text-align: justify
 
 ul
+  list-style-position: inside
+
   &.taxonomy-list
     list-style-type: none
     margin: 0
@@ -231,6 +230,10 @@ ul
 
   li
     @include font-size(1.4)
+
+    p
+      display: inline-block
+      margin: 0
 
 .share-me
   border-top: 1px solid $separator
