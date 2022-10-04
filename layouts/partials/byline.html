@@ -1,25 +1,25 @@
 {{ $author := "" }}
-{{ if not .Params.noauthor }}
-  {{ $author = .Site.Author }}
-  {{if .Params.author }}
-    {{$author = index .Site.Data.authors (.Params.author | lower) }}
+{{ if not .this.Params.noauthor }}
+  {{ $author = .this.Site.Author }}
+  {{if .this.Params.author }}
+    {{$author = index .this.Site.Data.authors (.this.Params.author | lower) }}
   {{end}}
-<div class="byline"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time> by {{ $author.DisplayName }}
-{{if .Params.categories }}
+<div class="byline"><time datetime="{{ .this.Date.Format "2006-01-02" }}">{{ .this.Date.Format "2 January 2006" }}</time> by {{ $author.DisplayName }}
+{{if .this.Params.categories }}
 in
-  {{- range $index, $category := .Params.categories -}}
+  {{- range $index, $category := .this.Params.categories -}}
     {{ if gt $index 0 }},{{ end }} <a href="{{ "/categories/" | relURL }}{{ . | urlize }}">{{ . | title }}</a>
   {{- end -}}
 {{- end -}}
-{{if .Params.tags }}
+{{if .this.Params.tags }}
 on
-  {{- range $index, $tag := .Params.tags -}}
+  {{- range $index, $tag := .this.Params.tags -}}
     {{ if gt $index 0 }},{{ end }} <a href="{{ "/tags/" | relURL }}{{ . | urlize }}">#{{ . | upper }}</a>
   {{- end -}}
 {{ end }}
-{{ if .Params.origin }}
-{{ $url := urls.Parse .Params.origin }}
-(Originally published at <a href="{{ .Params.origin}}">{{ $url.Host }}</a>)
+{{ if and .this.Params.origin .showOrigin }}
+  {{ $url := urls.Parse .this.Params.origin }}
+(Originally published at <a href="{{ .this.Params.origin}}">{{ $url.Host }}</a>)
 {{ end }}
 </div>
 {{end}}
