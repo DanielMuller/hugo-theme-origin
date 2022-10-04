@@ -17,5 +17,9 @@ on
     {{ if gt $index 0 }},{{ end }} <a href="{{ "/tags/" | relURL }}{{ . | urlize }}">#{{ . | upper }}</a>
   {{- end -}}
 {{ end }}
+{{ if .Params.origin }}
+{{ $url := urls.Parse .Params.origin }}
+(Originally published at <a href="{{ .Params.origin}}">{{ $url.Host }}</a>)
+{{ end }}
 </div>
 {{end}}

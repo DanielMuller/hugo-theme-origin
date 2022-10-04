@@ -10,6 +10,7 @@ categories = [
 tags = [
   ""
 ]
+origin = ""
 [amp]
   elements = ["amp-image-lightbox", "amp-social-share"]
 +++

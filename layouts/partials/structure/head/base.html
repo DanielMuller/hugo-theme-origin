@@ -1,6 +1,10 @@
 <meta charset="utf-8">
 {{ partial "amp/header" . }}
+{{ if .Params.origin }}
+<link rel="canonical" href="{{ .Params.origin }}">
+{{ else }}
 <link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
 {{ with  .OutputFormats.Get "rss" -}}
