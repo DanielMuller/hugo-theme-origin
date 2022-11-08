@@ -1,11 +1,16 @@
 {{ if isset $.Site.Params "googleanalytics" }}
-<amp-analytics type="googleanalytics">
+<amp-analytics type="googleanalytics" config="https://amp.analytics-debugger.com/ga4.json" data-credentials="include">
     <script type="application/json">
         {
             "vars": {
-                "account": "{{ $.Site.Params.googleAnalytics }}"
-            },
-            "triggers": {{ .Site.Data.analytics.triggers }}
+              "GA4_MEASUREMENT_ID": "{{ $.Site.Params.googleAnalytics }}",
+              "GA4_ENDPOINT_HOSTNAME": "www.google-analytics.com",
+              "DEFAULT_PAGEVIEW_ENABLED": true,
+              "GOOGLE_CONSENT_ENABLED": false,
+              "WEBVITALS_TRACKING": false,
+              "PERFORMANCE_TIMING_TRACKING": false,
+              "SEND_DOUBLECLICK_BEACON": false
+            }
         }
     </script>
 </amp-analytics>
