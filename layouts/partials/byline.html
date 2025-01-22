@@ -1,6 +1,6 @@
 {{ $author := "" }}
 {{ if not .this.Params.noauthor }}
-  {{ $author = .this.Site.Author }}
+  {{ $author = .this.Site.Params.Author }}
   {{if .this.Params.author }}
     {{$author = index .this.Site.Data.authors (.this.Params.author | lower) }}
   {{end}}

@@ -50,7 +50,7 @@
 
 {{ if .IsPage }}
     {{ if not .Params.noauthor }}
-        {{$.Scratch.Set "author" .Site.Author}}
+        {{$.Scratch.Set "author" .Site.Params.Author}}
         {{if .Params.author }}
             {{if isset .Site.Data.authors (.Params.author | lower)}}
                 {{$author := index .Site.Data.authors (.Params.author | lower) }}
@@ -62,7 +62,7 @@
             <meta property="article:author" content="{{ . }}" />
         {{ end }}
     {{ end }}
-    {{ with .Site.Social.facebook }}
+    {{ with .Site.Params.Social.facebook }}
         <meta property="article:publisher" content="https://www.facebook.com/{{ . }}" />
     {{ else }}
         {{ with .Site.Title }}
@@ -82,6 +82,6 @@
 {{ end }}
 
 <!-- Facebook Page Admin ID for Domain Insights -->
-{{ with .Site.Social.facebook_admin }}
+{{ with .Site.Params.Social.facebook_admin }}
     <meta property="fb:admins" content="{{ . }}" />
 {{ end }}

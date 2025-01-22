@@ -1,11 +1,11 @@
-{{ if and (.Site.Author) (isset .Site.Author "twitter") }}
+{{ if and (.Site.Params.Author) (isset .Site.Params.Author "twitter") }}
 <h3>Latest tweets</h3>
 <amp-twitter
   width="300"
   height="400"
   layout="responsive"
   data-timeline-source-type="profile"
-  data-timeline-screen-name="{{ .Site.Author.twitter }}"
+  data-timeline-screen-name="{{ .Site.Params.Author.twitter }}"
   data-tweet-limit="4"
   data-chrome="noheader nofooter"
   data-theme="light"

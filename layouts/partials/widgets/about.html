@@ -1,66 +1,66 @@
-{{ if .Site.Author }}
+{{ if .Site.Params.Author }}
     <h3>About Me</h3>
         <div class="social">
-            {{ if .Site.Author.linkedin }}
-                <a href="https://www.linkedin.com/in/{{ .Site.Author.linkedin }}" target="_blank">
+            {{ if .Site.Params.Author.linkedin }}
+                <a href="https://www.linkedin.com/in/{{ .Site.Params.Author.linkedin }}" target="_blank">
                     <i class="fab fa-linkedin" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.github }}
-                <a href="https://github.com/{{ .Site.Author.github }}" target="_blank">
+            {{ if .Site.Params.Author.github }}
+                <a href="https://github.com/{{ .Site.Params.Author.github }}" target="_blank">
                     <i class="fab fa-github" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.flickr }}
-                <a href="https://flickr.com/{{ .Site.Author.flickr }}" target="_blank">
+            {{ if .Site.Params.Author.flickr }}
+                <a href="https://flickr.com/{{ .Site.Params.Author.flickr }}" target="_blank">
                     <i class="fab fa-flickr" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.twitter }}
-                <a href="https://twitter.com/{{ .Site.Author.twitter }}" target="_blank">
+            {{ if .Site.Params.Author.twitter }}
+                <a href="https://twitter.com/{{ .Site.Params.Author.twitter }}" target="_blank">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.facebook }}
-                <a href="https://www.facebook.com/{{ .Site.Author.facebook }}" target="_blank">
+            {{ if .Site.Params.Author.facebook }}
+                <a href="https://www.facebook.com/{{ .Site.Params.Author.facebook }}" target="_blank">
                     <i class="fab fa-facebook-square" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.instagram }}
-                <a href="https://instagram.com/{{ .Site.Author.instagram }}" target="_blank">
+            {{ if .Site.Params.Author.instagram }}
+                <a href="https://instagram.com/{{ .Site.Params.Author.instagram }}" target="_blank">
                     <i class="fab fa-instagram-square" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.email }}
-                <a href="mailto:{{ .Site.Author.email }}" target="_blank">
+            {{ if .Site.Params.Author.email }}
+                <a href="mailto:{{ .Site.Params.Author.email }}" target="_blank">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.pinterest }}
-                <a href="https://www.pinterest.com/{{ .Site.Author.pinterest }}" target="_blank">
+            {{ if .Site.Params.Author.pinterest }}
+                <a href="https://www.pinterest.com/{{ .Site.Params.Author.pinterest }}" target="_blank">
                     <i class="fab fa-pinterest" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.reddit }}
-                <a href="https://www.reddit.com/user/{{ .Site.Author.reddit }}" target="_blank">
+            {{ if .Site.Params.Author.reddit }}
+                <a href="https://www.reddit.com/user/{{ .Site.Params.Author.reddit }}" target="_blank">
                     <i class="fab fa-reddit" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.devto }}
-                <a href="https://dev.to/{{ .Site.Author.devto }}" target="_blank">
+            {{ if .Site.Params.Author.devto }}
+                <a href="https://dev.to/{{ .Site.Params.Author.devto }}" target="_blank">
                     <i class="fab fa-dev" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.website }}
-                <a href="{{ .Site.Author.website }}" target="_blank">
+            {{ if .Site.Params.Author.website }}
+                <a href="{{ .Site.Params.Author.website }}" target="_blank">
                     <i class="far fa-address-card" aria-hidden="true"></i>
                 </a>
             {{end}}
-            {{ if .Site.Author.flipboard }}
-                <a href="https://flipboard.com/@{{ .Site.Author.flipboard }}" target="_blank">
+            {{ if .Site.Params.Author.flipboard }}
+                <a href="https://flipboard.com/@{{ .Site.Params.Author.flipboard }}" target="_blank">
                     <i class="fab fa-flipboard" aria-hidden="true"></i>
                 </a>
             {{end}}
         </div>
-        {{ .Site.Author.bio | safeHTML }}
+        {{ .Site.Params.Author.bio | safeHTML }}
 {{ end }}

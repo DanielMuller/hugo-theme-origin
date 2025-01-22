@@ -1,6 +1,6 @@
 {{ if isset .Params.recipe "category" }}
 {{ if not .Params.noauthor }}
-    {{$.Scratch.Set "author" .Site.Author}}
+    {{$.Scratch.Set "author" .Site.Params.Author}}
     {{if .Params.author }}
         {{if isset .Site.Data.authors (.Params.author | lower)}}
             {{$author := index .Site.Data.authors (.Params.author | lower) }}
