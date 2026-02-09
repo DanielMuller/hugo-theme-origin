@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ $paginator := .Paginate (.Site.RegularPages) }}
+{{ $paginator := .Paginate (.Site.RegularPages.ByLastmod.Reverse) }}
 <nav class="pagination" role="pagination">
 {{ template "_internal/pagination.html" . }}
 </nav>

@@ -1,10 +1,10 @@
 {{ $author := "" }}
 {{ if not .this.Params.noauthor }}
-  {{ $author = .this.Site.Params.Author }}
+  {{ $author = .this.Site.Author }}
   {{if .this.Params.author }}
     {{$author = index .this.Site.Data.authors (.this.Params.author | lower) }}
   {{end}}
-<div class="byline"><time datetime="{{ .this.Date.Format "2006-01-02" }}">{{ .this.Date.Format "2 January 2006" }}</time> by {{ $author.DisplayName }}
+<div class="byline"><time datetime="{{ .this.Lastmod.Format "2006-01-02" }}">{{ .this.Lastmod.Format "2 January 2006" }}</time> by {{ $author.DisplayName }}
 {{if .this.Params.categories }}
 in
   {{- range $index, $category := .this.Params.categories -}}
